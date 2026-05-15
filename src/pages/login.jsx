@@ -1,25 +1,87 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../redux/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  // States locaux pour capturer les entrées de l'utilisateur
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Fonction de gestion de la soumission du formulaire
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Empêche le rechargement de la page
+
+    try {
+      // Appel API POST pour l'authentification
+      const response = await fetch('http://localhost:3001/api/v1/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const token = data.body.token; // Récupération du token JWT
+
+        // Envoi du token vers le store Redux
+        dispatch(loginSuccess(token));
+
+        // Redirection vers la page profil après une connexion réussie
+        navigate('/profile');
+      } else {
+        // Gestion de l'erreur d'identifiants
+        setErrorMessage('Email ou mot de passe incorrect');
+      }
+    } catch (error) {
+      // Gestion de l'erreur réseau (serveur éteint par exemple)
+      setErrorMessage('Erreur lors de la connexion au serveur');
+    }
+  };
+
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
-            <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+            <label htmlFor="username">Email</label>
+            <input 
+              type="text" 
+              id="username" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)} 
+              required
+            />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+            <input 
+              type="password" 
+              id="password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)} 
+              required
+            />
           </div>
+          {/* Affichage dynamique du message d'erreur */}
+          {errorMessage && (
+            <p style={{ color: '#ff4b4b', marginBottom: '1rem', fontWeight: 'bold' }}>
+              {errorMessage}
+            </p>
+          )}
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <button className="sign-in-button">Sign In</button>
+          <button className="sign-in-button" type="submit">Sign In</button>
         </form>
       </section>
     </main>
