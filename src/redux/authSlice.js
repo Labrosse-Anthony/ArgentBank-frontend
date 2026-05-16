@@ -1,28 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// Le Slice gère une partie précise du state global (ici l'authentification).
 const authSlice = createSlice({
-  name: 'auth', // Nom du slice utilisé dans les actions
+  name: 'auth',
   initialState: {
-    token: null, // Stockera le token JWT récupéré via l'API
-    isAuthenticated: false, // Permet de savoir rapidement si l'utilisateur est loggé
+    token: null,
+    isAuthenticated: false,
+    // Ajout des données de profil de l'utilisateur
+    userProfile: {
+      username: '',
+      firstName: '',
+      lastName: '',
+    }
   },
   reducers: {
-    // loginSuccess est appelée quand l'API renvoie une réponse positive. action.payload contiendra le token.
     loginSuccess: (state, action) => {
       state.token = action.payload;
       state.isAuthenticated = true;
     },
-    //logout permet de réinitialiser le state lors de la déconnexion.
+    // Nouvelle action pour stocker les infos de l'utilisateur récupérées depuis l'API
+    setProfile: (state, action) => {
+      state.userProfile = action.payload;
+    },
+    // Nouvelle action pour mettre à jour uniquement le username
+    updateUsernameSuccess: (state, action) => {
+      state.userProfile.username = action.payload;
+    },
     logout: (state) => {
       state.token = null;
       state.isAuthenticated = false;
+      state.userProfile = { username: '', firstName: '', lastName: '' };
     },
   },
 });
 
-// On exporte les actions pour pouvoir les appeler (dispatch) depuis les composants
-export const { loginSuccess, logout } = authSlice.actions;
-
-// On exporte le reducer pour l'enregistrer dans le store
+export const { loginSuccess, setProfile, updateUsernameSuccess, logout } = authSlice.actions;
 export default authSlice.reducer;
