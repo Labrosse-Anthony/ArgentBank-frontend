@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import './index.css';
 import './main.css';
 import Login from './pages/login';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <Footer />
       </div>
