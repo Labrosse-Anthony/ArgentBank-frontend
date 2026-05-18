@@ -7,7 +7,7 @@ const authSlice = createSlice({
     isAuthenticated: false,
     // Ajout des données de profil de l'utilisateur
     userProfile: {
-      username: '',
+      userName: '',
       firstName: '',
       lastName: '',
     }
@@ -23,12 +23,12 @@ const authSlice = createSlice({
     },
     // Nouvelle action pour mettre à jour uniquement le username
     updateUsernameSuccess: (state, action) => {
-      state.userProfile.username = action.payload;
+      state.userProfile.userName = action.payload;
     },
     logout: (state) => {
       state.token = null;
       state.isAuthenticated = false;
-      state.userProfile = { username: '', firstName: '', lastName: '' };
+      state.userProfile = { userName: '', firstName: '', lastName: '' };
     },
   },
 });
