@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/authSlice';
-import logo from '../assets/img/argentBankLogo.png';
+import logo from '../assets/img/argentBankLogo.webp';
 
 function Header() {
   // On récupère l'état de connexion et le profil depuis Redux
