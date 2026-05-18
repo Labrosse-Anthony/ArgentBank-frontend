@@ -81,19 +81,19 @@ function Profile() {
   return (
     <main className="main bg-dark">
       <div className="header">
-        {/* CONDITION VISUELLE : Si isEditing est faux, on affiche la vue normale (Photo 1) */}
+        {/* CONDITION VISUELLE : Si isEditing est faux, on affiche la vue normale */}
         {!isEditing ? (
           <>
             <h1>Welcome back<br />{userProfile.firstName || 'Tony'} {userProfile.lastName || 'Stark'}!</h1>
             <button className="edit-button" onClick={() => setIsEditing(true)}>Edit Name</button>
           </>
         ) : (
-          /* Si isEditing est vrai, on affiche le formulaire d'édition (Photo 2) */
-          <div className="edit-form-container">
+          /* Si isEditing est vrai, on affiche le formulaire d'édition */
+          <div className="edit-form">
             <h1>Edit user info</h1>
-            <form onSubmit={handleSave}>
-              <div className="edit-input-wrapper">
-                <label htmlFor="username">User name: </label>
+            <form onSubmit={handleSave} className="edit-form-inputs">
+              <div className="input-wrapper">
+                <label htmlFor="username">User name:</label>
                 <input 
                   type="text" 
                   id="username" 
@@ -102,20 +102,20 @@ function Profile() {
                   required
                 />
               </div>
-              <div className="edit-input-wrapper">
-                <label htmlFor="firstname">First name: </label>
-                <input type="text" id="firstname" value={userProfile.firstName} disabled className="disabled-input" />
+              <div className="input-wrapper">
+                <label htmlFor="firstname">First name:</label>
+                <input type="text" id="firstname" value={userProfile.firstName} disabled />
               </div>
-              <div className="edit-input-wrapper">
-                <label htmlFor="lastname">Last name: </label>
-                <input type="text" id="lastname" value={userProfile.lastName} disabled className="disabled-input" />
+              <div className="input-wrapper">
+                <label htmlFor="lastname">Last name:</label>
+                <input type="text" id="lastname" value={userProfile.lastName} disabled />
               </div>
               
-              {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
               
-              <div className="edit-buttons">
-                <button type="submit" className="form-button">Save</button>
-                <button type="button" className="form-button" onClick={() => setIsEditing(false)}>Cancel</button>
+              <div className="edit-form-buttons">
+                <button type="submit" className="save-button">Save</button>
+                <button type="button" className="cancel-button" onClick={() => setIsEditing(false)}>Cancel</button>
               </div>
             </form>
           </div>
