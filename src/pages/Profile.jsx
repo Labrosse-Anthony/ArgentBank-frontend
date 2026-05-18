@@ -25,7 +25,7 @@ function Profile() {
     const fetchUserProfile = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/v1/user/profile', {
-          method: 'POST',
+          method: 'GET', // <-- LA CORRECTION EST ICI (GET au lieu de POST)
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -84,7 +84,7 @@ function Profile() {
         {/* CONDITION VISUELLE : Si isEditing est faux, on affiche la vue normale */}
         {!isEditing ? (
           <>
-            <h1>Welcome back<br />{userProfile.firstName || 'Tony'} {userProfile.lastName || 'Stark'}!</h1>
+            <h1>Welcome back<br />{userProfile.firstName} {userProfile.lastName}!</h1>
             <button className="edit-button" onClick={() => setIsEditing(true)}>Edit Name</button>
           </>
         ) : (
