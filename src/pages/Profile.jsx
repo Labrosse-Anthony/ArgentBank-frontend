@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setProfile, updateUsernameSuccess } from '../redux/authSlice';
+import AccountCard from '../components/AccountCard'; // <-- Import du nouveau composant
 
 function Profile() {
   const { token, isAuthenticated, userProfile } = useSelector((state) => state.auth);
@@ -25,7 +26,7 @@ function Profile() {
     const fetchUserProfile = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/v1/user/profile', {
-          method: 'GET', // <-- LA CORRECTION EST ICI (GET au lieu de POST)
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -74,21 +75,42 @@ function Profile() {
     }
   };
 
-  if (!isAuthenticated || !token) {
+  // Sécurité d'affichage si l'utilisateur n'est pas encore chargé
+  if (!isAuthenticated || !token || !userProfile) {
     return null;
   }
+
+  // 3. Données des comptes (idéalement, cela viendrait aussi de l'API plus tard)
+  const accountsData = [
+    {
+      id: "1",
+      title: "Argent Bank Checking (x8349)",
+      amount: "$2,082.79",
+      description: "Available Balance"
+    },
+    {
+      id: "2",
+      title: "Argent Bank Savings (x6712)",
+      amount: "$10,928.42",
+      description: "Available Balance"
+    },
+    {
+      id: "3",
+      title: "Argent Bank Credit Card (x5730)",
+      amount: "$184.30",
+      description: "Current Balance"
+    }
+  ];
 
   return (
     <main className="main bg-dark">
       <div className="header">
-        {/* CONDITION VISUELLE : Si isEditing est faux, on affiche la vue normale */}
         {!isEditing ? (
           <>
             <h1>Welcome back<br />{userProfile.firstName} {userProfile.lastName}!</h1>
             <button className="edit-button" onClick={() => setIsEditing(true)}>Edit Name</button>
           </>
         ) : (
-          /* Si isEditing est vrai, on affiche le formulaire d'édition */
           <div className="edit-form">
             <h1>Edit user info</h1>
             <form onSubmit={handleSave} className="edit-form-inputs">
@@ -123,36 +145,17 @@ function Profile() {
       </div>
 
       <h2 className="sr-only">Accounts</h2>
-      <section className="account">
-        <div className="account-content-wrapper">
-          <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-          <p className="account-amount">$2,082.79</p>
-          <p className="account-amount-description">Available Balance</p>
-        </div>
-        <div className="account-content-wrapper cta">
-          <button className="transaction-button">View transactions</button>
-        </div>
-      </section>
-      <section className="account">
-        <div className="account-content-wrapper">
-          <h3 className="account-title">Argent Bank Savings (x6712)</h3>
-          <p className="account-amount">$10,928.42</p>
-          <p className="account-amount-description">Available Balance</p>
-        </div>
-        <div className="account-content-wrapper cta">
-          <button className="transaction-button">View transactions</button>
-        </div>
-      </section>
-      <section className="account">
-        <div className="account-content-wrapper">
-          <h3 className="account-title">Argent Bank Credit Card (x5730)</h3>
-          <p className="account-amount">$184.30</p>
-          <p className="account-amount-description">Current Balance</p>
-        </div>
-        <div className="account-content-wrapper cta">
-          <button className="transaction-button">View transactions</button>
-        </div>
-      </section>
+      
+      {/* 4. Affichage dynamique des comptes grâce au composant AccountCard */}
+      {accountsData.map((account) => (
+        <AccountCard 
+          key={account.id}
+          title={account.title}
+          amount={account.amount}
+          description={account.description}
+        />
+      ))}
+      
     </main>
   );
 }
