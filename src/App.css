@@ -35,6 +35,7 @@ body {
   background-color: #12002b;
   align-items: center;
   justify-content: center;
+
 }
 
 .main.bg-dark:has(.sign-in-content) {
@@ -70,14 +71,13 @@ body {
 
 .main-nav-item {
   text-decoration: none;
-  margin-right: 1.5rem; /* Augmenté pour aérer l'espace avec le bord de l'écran */
+  margin-right: 1.5rem; 
 }
 
 .main-nav-item:hover {
   text-decoration: underline;
 }
 
-/* Correction du 'n' en trop pour appliquer l'espace sur l'icône de la porte */
 .main-nav-item i {
   margin-right: 8px;
 }
@@ -115,6 +115,10 @@ body {
   font-weight: bold;
   font-size: 1rem;
   margin: 0;
+}
+
+.hero-text {
+    font-size: 14px;
 }
 
 .hero-content .text {
@@ -186,18 +190,19 @@ body {
   background-color: #00bc77;
   color: #fff;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .sign-in-content {
   box-sizing: border-box;
   background-color: white;
   width: 300px;
-  margin: 0 auto;
+  margin: 3rem auto 5rem auto;
   padding: 2rem;
 }
 
 .sign-in-icon {
-  font-size: 5rem;
+  font-size: 25px;
 }
 
 .input-remember {
