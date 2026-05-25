@@ -1,6 +1,6 @@
 # Argent Bank - Application bancaire
 
-![Argent Bank Logo](https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Project-10-Bank-API/master/designs/argentBankLogo.png)
+![Argent Bank Logo]
 
 * Ce travail a été réalisé dans le cadre du projet n°10 de la formation Intégrateur Web d'OpenClassrooms.
 * Ce projet consiste en la création d'une application web dynamique avec React pour une banque nommée Argent Bank.
@@ -20,23 +20,20 @@ Le projet nécessite de faire tourner à la fois le serveur Backend (l'API) et l
 
 ### 1. Installation du Backend (API)
 
-```bash
-# Clonez le dépôt backend fourni par OpenClassrooms
 git clone [https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API.git](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API.git)
 
-# Installez les dépendances
+* **Installez les dépendances**
 npm install
 
-# Lancez le serveur de développement (sur le port 3001)
+* **Lancez le serveur de développement (sur le port 3001)**
 npm run dev:server
 
-### 2.Installation du Frontend
+### 2. Installation du Frontend
 
-```bash
-# Installez l'ensemble des dépendances du projet
+* **Installez l'ensemble des dépendances du projet**
 npm install
 
-# Lancez l'application en mode développement (accessible sur http://localhost:3000)
+* **Lancez l'application en mode développement (accessible sur http://localhost:3000)**
 npm start
 
 ## Outils et langages pour la réalisation du projet
