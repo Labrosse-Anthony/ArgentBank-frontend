@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Argent Bank - Application bancaire
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Argent Bank Logo](https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Project-10-Bank-API/master/designs/argentBankLogo.png)
 
-## Available Scripts
+* Ce travail a été réalisé dans le cadre du projet n°10 de la formation Intégrateur Web d'OpenClassrooms.
+* Ce projet consiste en la création d'une application web dynamique avec React pour une banque nommée Argent Bank.
+* L'objectif du site est de permettre aux utilisateurs de se connecter de manière sécurisée et de gérer leur profil utilisateur en interagissant avec une API REST.
 
-In the project directory, you can run:
+## Fonctionnalités
 
-### `npm start`
+* **Authentification sécurisée :** Mise en place d'un système de connexion via une API REST avec récupération et stockage d'un jeton d'accès (JWT).
+* **Gestion d'état globale :** Utilisation de Redux Toolkit pour centraliser les informations de session (token) et les données du profil utilisateur.
+* **Routage dynamique :** Navigation fluide sans rechargement de page (Single Page Application) grâce à React Router DOM, avec protection des routes privées.
+* **Mise à jour du profil :** Formulaire interactif permettant à l'utilisateur de modifier son pseudonyme (userName) avec sauvegarde persistante sur la base de données (requête PUT).
+* **Intégration API avec Swagger :** Utilisation de la documentation Swagger pour structurer les requêtes HTTP (POST, PUT) selon les schémas de données attendus.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Le projet nécessite de faire tourner à la fois le serveur Backend (l'API) et le serveur Frontend (l'application React).
 
-### `npm test`
+### 1. Installation du Backend (API)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+# Clonez le dépôt backend fourni par OpenClassrooms
+git clone [https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API.git](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API.git)
 
-### `npm run build`
+# Installez les dépendances
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Lancez le serveur de développement (sur le port 3001)
+npm run dev:server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2.Installation du Frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+# Installez l'ensemble des dépendances du projet
+npm install
 
-### `npm run eject`
+# Lancez l'application en mode développement (accessible sur http://localhost:3000)
+npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Outils et langages pour la réalisation du projet
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Le projet a été réalisé avec **HTML5**, **CSS3 (Sass)**, **JavaScript** et **React**.
+* La gestion d'état globale a été propulsée par **Redux Toolkit** et **React-Redux**.
+* Le routage dynamique a été géré via **React Router DOM**.
+* La communication avec la base de données a été orchestrée via des appels **API REST** et documentée avec **Swagger**.
