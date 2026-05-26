@@ -1,15 +1,43 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
 
-//Configuration du store Redux : c'est le "cerveau" de l'application
-// Il centralise toutes les données que l'on veut partager entre les composants.
-const store = configureStore({
-  reducer: {
-    // On définit une tranche (slice) d'état nommée 'auth'
-    // Elle sera gérée par le authReducer que nous avons créé
-    auth: authReducer, 
-  },
+// Imports spécifiques à Redux Persist
+import { 
+  persistStore, 
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // Utilise le localStorage par défaut
+
+// Configuration de la sauvegarde
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+// On combine nos reducers (utile si tu en as plusieurs plus tard)
+const rootReducer = combineReducers({
+  auth: authReducer,
 });
 
-// On exporte le store pour qu'il puisse être utilisé par le composant <Provider> dans index.js
+// On crée un reducer "persistant"
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({
+  reducer: persistedReducer,
+  // Middleware requis par Redux Toolkit pour éviter les erreurs dans la console avec Redux Persist
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
+
+export const persistor = persistStore(store);
 export default store;

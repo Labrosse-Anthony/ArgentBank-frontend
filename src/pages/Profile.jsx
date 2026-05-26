@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setProfile, updateUsernameSuccess } from '../redux/authSlice';
-import AccountCard from '../components/AccountCard'; // <-- Import du nouveau composant
+import AccountCard from '../components/AccountCard';
 
 function Profile() {
   const { token, isAuthenticated, userProfile } = useSelector((state) => state.auth);
