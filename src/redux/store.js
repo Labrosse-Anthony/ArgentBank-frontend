@@ -20,7 +20,7 @@ const persistConfig = {
   storage,
 };
 
-// On combine nos reducers (utile si tu en as plusieurs plus tard)
+// On combine nos reducers
 const rootReducer = combineReducers({
   auth: authReducer,
 });
