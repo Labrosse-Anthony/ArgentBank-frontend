@@ -8,15 +8,10 @@ function Profile() {
   const { token, isAuthenticated, userProfile } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // Mode édition : true = formulaire visible, false = texte visible
   const [isEditing, setIsEditing] = useState(false);
-  
-  // State local pour le champ de modification du username
   const [newUsername, setNewUsername] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // 1. Protection de la route et récupération des données du profil
   useEffect(() => {
     if (!isAuthenticated || !token) {
       navigate('/login');
@@ -35,9 +30,7 @@ function Profile() {
 
         if (response.ok) {
           const data = await response.json();
-          // Sauvegarde des infos de l'utilisateur dans le store Redux
           dispatch(setProfile(data.body));
-          // Pré-remplit le champ d'édition avec le username actuel
           setNewUsername(data.body.userName || '');
         }
       } catch (error) {
@@ -62,9 +55,7 @@ function Profile() {
       });
 
       if (response.ok) {
-        // Met à jour Redux avec le nouveau username
         dispatch(updateUsernameSuccess(newUsername));
-        // Ferme le formulaire d'édition
         setIsEditing(false);
         setErrorMessage('');
       } else {
@@ -75,7 +66,6 @@ function Profile() {
     }
   };
 
-  // Sécurité d'affichage si l'utilisateur n'est pas encore chargé
   if (!isAuthenticated || !token || !userProfile) {
     return null;
   }

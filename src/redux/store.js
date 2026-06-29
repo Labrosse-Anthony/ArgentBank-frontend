@@ -1,7 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
 
-// Imports spécifiques à Redux Persist
 import { 
   persistStore, 
   persistReducer,
@@ -12,25 +11,22 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // Utilise le localStorage par défaut
+import storage from 'redux-persist/lib/storage';
 
-// Configuration de la sauvegarde
 const persistConfig = {
   key: 'root',
   storage,
 };
 
-// On combine nos reducers
 const rootReducer = combineReducers({
   auth: authReducer,
 });
 
-// On crée un reducer "persistant"
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
-  // Middleware requis par Redux Toolkit pour éviter les erreurs dans la console avec Redux Persist
+
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

@@ -4,7 +4,6 @@ import { loginSuccess } from '../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  // States locaux pour capturer les entrées de l'utilisateur
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -12,12 +11,10 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Fonction de gestion de la soumission du formulaire
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Empêche le rechargement de la page
+    e.preventDefault();
 
     try {
-      // Appel API POST pour l'authentification
       const response = await fetch('http://localhost:3001/api/v1/user/login', {
         method: 'POST',
         headers: {
@@ -28,19 +25,14 @@ function Login() {
 
       if (response.ok) {
         const data = await response.json();
-        const token = data.body.token; // Récupération du token JWT
+        const token = data.body.token;
 
-        // Envoi du token vers le store Redux
         dispatch(loginSuccess(token));
-
-        // Redirection vers la page profil après une connexion réussie
         navigate('/profile');
       } else {
-        // Gestion de l'erreur d'identifiants
         setErrorMessage('Email ou mot de passe incorrect');
       }
     } catch (error) {
-      // Gestion de l'erreur réseau (serveur éteint par exemple)
       setErrorMessage('Erreur lors de la connexion au serveur');
     }
   };
