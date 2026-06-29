@@ -1,6 +1,6 @@
 # Argent Bank - Application bancaire
 
-![Argent Bank Logo]
+![Argent Bank Logo](./src/assets/img/argent-bank.webp)
 
 * Ce travail a été réalisé dans le cadre du projet n°10 de la formation Intégrateur Web d'OpenClassrooms.
 * Ce projet consiste en la création d'une application web dynamique avec React pour une banque nommée Argent Bank.
